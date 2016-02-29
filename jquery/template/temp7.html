@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=utf-8>
+	<title>Appending content on my web site</title>
+	<style> 
+		body{
+			margin: auto;
+			width:700px;
+
+			font-family: sans-serif;
+		}
+		#contact{
+			background: #e3e3e3;
+			padding: 1em 2em;
+			position: relative;
+		}
+		.js #contact{
+			position: absolute;
+			top:0;
+			width:inherit;
+			display: none;
+		}
+		#contact h2{margin.top:0;text-align: center;}
+		#contact li{padding:5px;}
+		#contact ul{
+			list-style:none;
+			margin-bottom:2em;
+		}
+		.close{
+			position: absolute;
+			right:10px;
+			top:10px;
+			font-weight: bold;
+			font-family: sans-serif;
+			cursor: pointer;
+		}
+		/*form input text*/
+		input,textarea{width:100%;line-height: 3em;}
+		input[type=submit] {width:auto;}
+		lable {display: block;text-align: left;}
+	</style>
+</head>
+<body>
+	<article>
+		<h1>my Awesome Post......</h1>
+
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+		</p>
+		<p>
+			<span class=co>Lorem ipsum dolor sit amet</span>, consectetur adipisicing elit. Temporibus facilis vitae ad quo quam quibusdam, earum tempore quae inventore mollitia sed labore, laborum illum 
+		</p>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores odit magni,<span class=co>abcdefg fyukysk ufyuj ufu </span> assumenda atque rem sunt tempore animi soluta fugiat sed provident, vel at suscipit error. Accusamus labore esse, quidem excepturi!
+		</p>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores odit magni, assumenda atque rem sunt tempore animi soluta fugiat sed provident.
+		</p>
+	</article>
+	<div id="contact">
+		<h2>Contact Me</h2>
+		<div class="container">
+			<form >
+				<ul>
+					<li>
+						<label for="name" style="margin-top:10px" >Name:</label>
+						<input text="Name" id="name">
+					</li>
+					<li>
+						<label for="datetime" style="margin-top:20px" >DateTime:</label>
+						<input text="datetime" id="name">
+					</li>
+
+					<li>
+						<label for="emailaddress" >Email Address:</label>
+						<input text="emailaddress" id="emailaddress">
+					</li>
+					<li>
+						<label for="comment" >What's Up?:</label>
+						<textarea name="comment" id="comment" cols="30" row="50" ></textarea>
+					</li>
+					<li>
+						<input type="submit" value="submit">
+					</li>
+
+				</ul>
+			</form>
+
+
+		</div>
+	</div>
+	<script src=".98./bower_components/jquery/dist/jquery.js"></script>
+<script>
+	
+	(function () {
+		$('html').addClass('js');
+		var contactForm = 
+		{
+			container:$('#contact'),
+			config: {
+				effect:'slideToggle',
+				speed:500
+			},
+			init:function(config){
+				// console.log(this);
+				$.extend(this.config, config);
+				$('<button></button>',{
+					text:'Contact Me'
+				})
+				.insertAfter('article:first')
+					.on('click', this.show);
+			},
+			show:function(){
+				var cf=contactForm,
+				container=cf.container,
+				config=cf.config;
+
+				if(container.is(':hidden')){
+					contactForm.close.call(container);
+					container[config.effect](config.speed);
+				} 
+			},
+			close:function(){
+				var $this= $(this);
+				if($this.find('span.close').length) return;
+				$('<span class=close>X</span>')
+				.prependTo(this)
+				.on('click',function(){
+					$this[contactForm.config.effect](contactForm.config.speed);
+				})
+			}
+		};
+		contactForm.init({
+			effect:'fadeToggle',
+			speed:2000
+		});
+	})();
+		// body...
+	
+</script>
+</body>
+</html>
